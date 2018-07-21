@@ -1,6 +1,10 @@
 import Restaurant from './restaurant.js';
+import {
+  setLoading
+} from './lib/loadingIndicator.js';
 
 $(document).ready(() => {
+    $('button[type=submit]').click(() => setLoading(true));
 
     // Place JavaScript code here...
     var foursquare_client_id = 'SRORFR3CHMAKXPPCIF5XD2KEZJXAPYCS4D0CH3TZ4WFQ50N2';
@@ -88,5 +92,4 @@ $(document).ready(() => {
     //         xhr.send();
     //     });
     // }
-
 });

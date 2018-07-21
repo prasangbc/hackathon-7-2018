@@ -1,0 +1,5 @@
+.search-area.input-group.mb-3
+  input.form-control.search(type="text", name="search")
+  input.zip(type="number", name="zip", placeholder='66210')
+  .input-group-prepend
+    button.btn.btn-outline-secondary(type='submit', (click)='setLoading(true)') Search
