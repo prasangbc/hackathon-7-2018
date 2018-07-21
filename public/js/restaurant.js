@@ -8,6 +8,9 @@ class Restaurant {
         this.wtfRating = 0;
         this.comments = null;
         this.menu = null;
+        this.rating = 0;
+        this.restaurantLikes = 0;
+        this.restaurantVisitsCount = 0;
     }
 }
 
