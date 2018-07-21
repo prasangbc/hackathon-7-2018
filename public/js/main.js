@@ -43,9 +43,12 @@ $(document).ready(() => {
                 //console.log(response.response.venues);
                 //console.log(response.response.venues.id);
                 for (var i = 0; i < response.response.venues.length; i++) {
-                    var restaurant = new Restaurant(response.response.venues[i].id, response.response.venues[i].name, response.response.venues[i].location.formattedAddress)
+                    var zipCode = response.response.venues[i].location.postalCode;
+                    var restaurantWTFId = restaurantKey(response.response.venues[i].name, zipCode);
+                    var restaurant = new Restaurant(restaurantWTFId, "FOURSQUARE", response.response.venues[i].id, response.response.venues[i].name, response.response.venues[i].location.formattedAddress)
                     restaurantsList.push(restaurant);
                     getRestaurantsDetails(restaurant);
+                    getRestaurantMenu(restaurant);
                     //console.log(restaurant);
                 }
                 console.log("Retrieved Restaurants List");
@@ -62,7 +65,7 @@ $(document).ready(() => {
     }
 
     function getRestaurantsDetails(restaurant) {
-        console.log("Retrieving Restaurant details from FourSquare for restaurant: " + restaurant.restaurantId);
+        console.log("Retrieving Restaurant details from FourSquare for restaurant: " + restaurant.sourceIdentifiers["FOURSQUARE"]);
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
 
@@ -93,17 +96,50 @@ $(document).ready(() => {
                 }
                 restaurant.commentsList = commentsList;
                 //console.log(restaurant.commentsList);
-                console.log("Retrieved Restaurant details from FourSquare for restaurant: " + restaurant.restaurantId);
+                console.log("Retrieved Restaurant details from FourSquare for restaurant: " + restaurant.sourceIdentifiers["FOURSQUARE"]);
             };
-            var URL = "https://api.foursquare.com/v2/venues/" + restaurant.restaurantId + "?" +
+            var URL = "https://api.foursquare.com/v2/venues/" + restaurant.sourceIdentifiers["FOURSQUARE"] + "?" +
                 "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret + "&v=" + today;
             //console.log(URL);
             xhr.open("GET", URL, true);
             xhr.send();
         });
     }
+
     function restaurantKey(name, zip) {
         var key = name.replace(/ /g, '') + zip;
         return key;
     }
+
+    function getRestaurantMenu(restaurant) {
+        console.log("Retrieving Restaurant Menu from FourSquare for restaurant: " + restaurant.sourceIdentifiers["FOURSQUARE"]);
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = event => {
+                if (xhr.status !== 200) {
+                    reject(xhr.status);
+                }
+                const response = JSON.parse(xhr.responseText);
+                resolve(response);
+                //console.log(response);
+                var menuItems = [];
+                //TODO:
+                // for (var j = 0; j < response.response.venue.tips.groups.length; j++) {
+                //     for (var k = 0; k < response.response.venue.tips.groups[j].items.length; k++) {
+                //         commentsList.push(response.response.venue.tips.groups[j].items[k].text)
+                //     }
+                // }
+                // restaurant.commentsList = commentsList;
+                //console.log(restaurant.commentsList);
+                console.log("Retrieved Restaurant Menu from FourSquare for restaurant: " + restaurant.sourceIdentifiers["FOURSQUARE"]);
+            };
+            var URL = "https://api.foursquare.com/v2/venues/" + restaurant.sourceIdentifiers["FOURSQUARE"] + "/menu?" +
+                "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret + "&v=" + today;
+            //console.log(URL);
+            xhr.open("GET", URL, true);
+            xhr.send();
+        });
+    }
+
 });
