@@ -133,6 +133,11 @@ $(document).ready(() => {
         });
     }
 
+    function restaurantKey(name, zip) {
+        var key = name.replace(/ /g, '') + zip;
+        return key;
+    }
+
     // function getRestaurantsDetails(restaurantId) {
     //     return new Promise((resolve, reject) => {
     //         const xhr = new XMLHttpRequest();
