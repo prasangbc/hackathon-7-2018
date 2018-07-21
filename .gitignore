@@ -35,6 +35,7 @@ bower_components
 # Editors
 .idea
 .vscode
+.history
 *.iml
 modules.xml
 *.ipr
