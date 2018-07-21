@@ -41,6 +41,7 @@ $(document).ready(() => {
                 for (var i = 0; i < response.response.venues.length; i++) {
                     var restaurant = new Restaurant(response.response.venues[i].id, response.response.venues[i].name, response.response.venues[i].location.formattedAddress)
                     restaurantsList.push(restaurant);
+                    //getRestaurantsDetails(restaurant);
                     //console.log(restaurant);
                 }
                 console.log("Retrieved Restaurants List");
@@ -51,7 +52,7 @@ $(document).ready(() => {
                 "&categoryId=" + category_id +
                 "&radius" + radius + "&v=" + today;
 
-            document.write(URL);
+            //document.write(URL);
             // xhr.open("GET",
             //     `https://api.foursquare.com/v2/venues/search?`, true);
             // xhr.setRequestHeader("ll", ll);
@@ -63,7 +64,7 @@ $(document).ready(() => {
         });
     }
 
-    // function getRestaurantsDetails(restaurantId) {
+    // function getRestaurantsDetails(restaurant) {
     //     return new Promise((resolve, reject) => {
     //         const xhr = new XMLHttpRequest();
 
@@ -80,7 +81,7 @@ $(document).ready(() => {
     //             }
     //             console.log("Retrieved Restaurant Details:" + restaurantsList);
     //         };
-    //         var URL = "https://api.foursquare.com/v2/venues/" + restaurantId;
+    //         var URL = "https://api.foursquare.com/v2/venues/" + restaurant.retaurantId;
 
     //         document.write(URL);
     //         xhr.open("GET", URL, true);
