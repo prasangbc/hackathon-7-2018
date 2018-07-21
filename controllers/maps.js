@@ -1,10 +1,22 @@
-
-
+const gKey = 'AIzaSyC2b3qoEKIIeeQN0YvMqOS8dupyy8p5cKg';
+const googleMapsClient = require('@google/maps').createClient({
+    key: gKey,
+});
+const promisify = require('util').promisify;
 
 exports.geocode = (req, res) => {
+    const { params: zipCode = zipcode } = req;
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({lat: 38.9193108, lng: -94.70188999999999}));
-};
+    promisify(googleMapsClient.geocode)({ address: zipCode.toString() })
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.status(500, {
+                error: err
+            });
+        });
+}
 
 exports.places = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
