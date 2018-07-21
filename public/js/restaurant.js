@@ -7,7 +7,7 @@ class Restaurant {
         }
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
-        this.wtfRating = 0;
+        //this.wtfRating = 0; 
         this.comments = null;
         this.menu = null;
         this.rating = 0;
@@ -16,6 +16,9 @@ class Restaurant {
         this.restaurantHasMenu = false;
         this.restaurantMenu = null;
     }
+
+    //function to club the results from another object
+
 }
 
 
