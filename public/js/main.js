@@ -21,8 +21,6 @@ $(document).ready(() => {
         mm = '0' + mm
     }
     today = yyyy + mm + dd;
-    document.write(today);
-
     getRestaurantsFromLatLong();
 
     function getRestaurantsFromLatLong(latitude = '39.09973', longitude = '-94.57857', radius = 25000) {
@@ -32,7 +30,6 @@ $(document).ready(() => {
 
             var comma = ','
             var ll = latitude.concat(comma, longitude);
-            document.write(ll);
             xhr.onload = event => {
                 if (xhr.status !== 200) {
                     reject(xhr.status);
