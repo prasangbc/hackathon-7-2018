@@ -3,7 +3,7 @@ const googleMapsClient = require('@google/maps').createClient({
     key,
 });
 const promisify = require('util').promisify;
-const populateResponseFromPromise = (promise) => promise
+const populateResponseFromPromise = (promise, res) => promise
     .then((response) => {
         res.send(response);
     })
@@ -17,7 +17,8 @@ exports.geocode = (req, res) => {
     const { params: zipCode = zipcode } = req;
     res.setHeader('Content-Type', 'application/json');
     populateResponseFromPromise(
-        promisify(googleMapsClient.geocode)({ address: zipCode.toString() }))
+        promisify(googleMapsClient.geocode)({ address: zipCode.toString() }),
+        res)
 }
 
 exports.places = (req, res) => {
@@ -40,5 +41,6 @@ exports.places = (req, res) => {
                 lat: parseFloat(lat),
                 lng: parseFloat(lng)
             }
-        }))
+        }),
+        res)
 }
