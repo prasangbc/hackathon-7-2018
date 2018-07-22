@@ -8,19 +8,7 @@ block content
     }
 
   .pb-2.mt-2.mb-4.border-bottom
-    h2
-      i.fab.fa-google.fa-sm
-      | Google Maps API
-
-  .btn-group.d-flex(role='group')
-    a.btn.btn-primary(href='https://developers.google.com/maps/documentation/javascript/tutorial', target='_blank').w-100
-      i.far.fa-check-square.fa-sm
-      | Getting Started
-    a.btn.btn-primary(href='https://console.developers.google.com/apis/dashboard', target='_blank').w-100
-      i.fas.fa-laptop.fa-sm
-      | API Console
-
-  h3 Markers Example
+    h2 Results Map
 
   #map
 
@@ -155,4 +143,4 @@ block content
       });
     }
 
-  script(async defer src=`https://maps.googleapis.com/maps/api/js?key=${google_map_api_key}&callback=initMap`)
+  script(async defer src=`https://maps.googleapis.com/maps/api/js?key=AIzaSyC2b3qoEKIIeeQN0YvMqOS8dupyy8p5cKg&callback=initMap`)

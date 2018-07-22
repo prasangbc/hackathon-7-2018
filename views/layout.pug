@@ -9,8 +9,6 @@ html
     title #{title} - Hackathon Starter
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
-    script(type='module' src='/js/lib/map.js')
-    script(async defer src="https://maps.googleapis.com/maps/api/js?key=1FUFIB113VVEDYVTZENGIA3I0ON2ZIRR2QEQ3V1IL5PAFH4F&callback=initMap")
 
   body
     include partials/header
@@ -31,6 +29,9 @@ html
     script(src='/js/lib/common.js' type = 'module')
     script(type='module' src='/js/lib/loadingIndicator.js')
     script(type='module' src='/js/lib/google.js')
+    
+    script(type='module' src='/js/lib/map.js')
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2b3qoEKIIeeQN0YvMqOS8dupyy8p5cKg&callback=initMap")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.
