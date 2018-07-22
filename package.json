@@ -1,12 +1,12 @@
 {
-    "name": "hackathon-starter",
+    "name": "Wheres the Food",
     "version": "5.1.1",
-    "description": "A boilerplate for Node.js web applications",
+    "description": "A web application to find best locations to eat the food you want to eat",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sahat/hackathon-starter.git"
+        "url": "https://github.com/prasangbc/hackathon-7-2018.git"
     },
-    "author": "Sahat Yalkabov",
+    "author": "Tejaswi Gade, Varun Kumar Chepuri, Prasanh Chhetri, Rom Komma",
     "license": "MIT",
     "scripts": {
         "postinstall": "npm rebuild node-sass",
