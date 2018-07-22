@@ -63,6 +63,8 @@
         }
         //adding to merge result
         retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
+
+        return retrieveMentionedComments.mergeResults.sort(sortBasedOnSecretSauce);
         //console.log(retrieveMentionedComments.mergeResults);
       }
     }
@@ -93,8 +95,35 @@
   function searchMenu(rawMenu, refinedString) {
 
   }
-  // Leave it here for testing purposes
-  //var restestObj = [{
+
+  //This is the secret sauce, lol
+  function sortBasedOnSecretSauce(aRestaurant, bRestaurant) {
+    if (aRestaurant.menuItemComments.length < bRestaurant.menuItemComments.length)
+      return 1;
+    else if (bRestaurant.menuItemComments.length > bRestaurant.menuItemComments.length)
+      return -1;
+    else {
+      if (aRestaurant.likes < bRestaurant.likes)
+        return 1;
+      else if (bRestaurant.likes > bRestaurant.likes)
+        return -1;
+      else {
+        if (aRestaurant.visitsCount < bRestaurant.visitsCount)
+          return 1;
+        else
+          return -1;
+      }
+    }
+  }
+
+  //var testObj = [{"menuItemComments":[], "likes":1, "visitsCount":4}
+  //              ,{ "menuItemComments": ["w"], "likes": 1, "visitsCount": 2 }
+  //              ,{ "menuItemComments": [], "likes": 1, "visitsCount": 3 }] 
+
+  //console.log("this is shit")
+  //console.log(testObj.sort(sortBasedOnSecretSauce));
+  //// Leave it here for testing purposes
+   //var restestObj = [{
   //  "address": [
   //    "101 E 13th St (at Walnut St)",
   //    "Kansas City, MO 64106",
