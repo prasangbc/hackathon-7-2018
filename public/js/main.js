@@ -4,8 +4,9 @@ import retrieveMentionedComments from './lib/secretSauce.js';
 import {
     registerSubmitHandler,
     updateResults,
-    registerInputChangeHandlers
-} from './lib/eventHandlers.js'
+    registerInputChangeHandlers,
+    registerModalHandlers
+ } from './lib/eventHandlers.js'
 import {
     getLatLng,
     getRestaurantsFromGoogle,
@@ -56,6 +57,7 @@ const fetchResults = () => {
 };
 
 $(document).ready(() => {
+    registerSubmitHandler('button[type=submit]', fetchResults);
     registerInputChangeHandlers();
-    registerSubmitHandler(fetchResults);
+    registerModalHandlers();
 });

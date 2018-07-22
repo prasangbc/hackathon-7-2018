@@ -16,10 +16,41 @@ const registerInputChangeHandlers = () => {
       updateZipCode($('input[name=zip]').val()))
 }
 
-const registerSubmitHandler = (onclick) => $('button[type=submit]').click(() => {
+const registerSubmitHandler = (buttonCss, onclick) => $(buttonCss).click(() => {
     setLoading(true);
     return onclick();
 });
+
+const registerModalHandlers = () => {
+    $('body').on('click', '#send-map', () => {
+        const phoneButton = $('#send-map');
+        const latLong = `${phoneButton.data('lat')},${phoneButton.data('long')}`
+        const message = `
+          Here's a link to the restaurant that you requested:
+          https://maps.google.com/maps?q=${latLong}
+        `;
+        const phone = $('#recipient').val();
+        return fetch('/api/twilio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message,
+                number: phone
+            })
+        })
+        .finally(() => $('#phone-modal').modal('hide'));
+    });
+    $('body').on('show.bs.modal', '#phone-modal', (event) => {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var lat = button.data('lat') // Extract info from data-* attributes
+        var long = button.data('long') // Extract info from data-* attributes
+        const sendButton = $('#send-map')
+        sendButton.data('lat', lat)
+        sendButton.data('long', long)
+    });
+}
 
 const updateResults = () => {
     return fetch('/results', {
@@ -45,5 +76,6 @@ const updateResults = () => {
 export {
     registerInputChangeHandlers,
     registerSubmitHandler,
-    updateResults
+    updateResults,
+    registerModalHandlers
 };
