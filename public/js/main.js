@@ -3,9 +3,14 @@ import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_ap
 import retrieveMentionedComments from './lib/secretSauce.js';
 import {
     registerSubmitHandler,
+<<<<<<< HEAD
     updateResults,
     registerInputChangeHandlers
  } from './lib/eventHandlers.js'
+=======
+    updateResults
+} from './lib/eventHandlers.js'
+>>>>>>> 2a3fb65a4637cf546f4c771a41188dd32c8d64da
 import {
     getLatLng,
     getRestaurantsFromGoogle
