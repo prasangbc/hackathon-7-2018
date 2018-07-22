@@ -2,9 +2,10 @@
     unless !restaurants || restaurants.length == 0
         .row
             .col-md-12
-                h4.bold Results
+                br
+                h4.font-weight-bold.font-italic Results
                 each restaurant in restaurants
-                    li.card
+                    li.card.highlight.rounded            
                         .card-title.row
                             .col-md-6.h5= restaurant.name
                             .col-md-2
