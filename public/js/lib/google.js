@@ -1,7 +1,7 @@
 import restaurantKey from './common.js';
 import Restaurant from './restaurant.js';
 
-var restrauntsList = [];
+var restaurantsList = [];
 
 function getLatLng(zipcode = 66210) {
     console.log("Get latitude and longitude for zipcode: " + zipcode);
@@ -22,63 +22,63 @@ function getLatLng(zipcode = 66210) {
     return fetch("/geocode?" + "zipcode=" + zipcode);
 }
 
-function getRestrauntsFromGoogle(query = 'biriyani', lat = '39.09973', lng = '-94.57857', radius = 25000, zipCode = 66210) {
-    console.log("Get Restraunts from Google for lat: " + lat + "lng: " + lng);
+function getRestaurantsFromGoogle(query = 'biriyani', lat = '39.09973', lng = '-94.57857', radius = 25000, zipCode = 66210) {
+    console.log("Get Restaurants from Google for lat: " + lat + "lng: " + lng);
     return new Promise((resolve, reject) => {
-        const getRestrauntsFrmGoog = new XMLHttpRequest();
-        getRestrauntsFrmGoog.onload = event => {
-            if (getRestrauntsFrmGoog.status !== 200) {
-                reject(getRestrauntsFrmGoog.status);
+        const getRestaurantsFrmGoog = new XMLHttpRequest();
+        getRestaurantsFrmGoog.onload = event => {
+            if (getRestaurantsFrmGoog.status !== 200) {
+                reject(getRestaurantsFrmGoog.status);
             }
-            const response = JSON.parse(getRestrauntsFrmGoog.responseText);
-            var restraunts = response.json.results;
-            for(var i = 0; i < restraunts.length; i++) {
-                var restrantWTFId = restaurantKey(restraunts[i].name, zipCode);
-                var restraunt= new Restaurant(restrantWTFId, "GOOGLE", restraunts[i].place_id, restraunts[i].name, restraunts[i].formatted_address);
-                restraunt.rating = restraunts[i].rating;
-                restrauntsList.push(restraunt);
-                getRestrauntFromGoogle(restraunt);
+            const response = JSON.parse(getRestaurantsFrmGoog.responseText);
+            var restaurants = response.json.results;
+            for(var i = 0; i < restaurants.length; i++) {
+                var restrantWTFId = restaurantKey(restaurants[i].name, zipCode);
+                var restaurant= new Restaurant(restrantWTFId, "GOOGLE", restaurants[i].place_id, restaurants[i].name, restaurants[i].formatted_address);
+                restaurant.rating = restaurants[i].rating;
+                restaurantsList.push(restaurant);
+                getRestaurantFromGoogle(restaurant);
             }
             resolve(response);
         }
         var URL = "/places?" + "query=" + query
             + "&type=restaurant" + "&radius=" + radius + "&lat=" + lat + "&lng=" + lng;
-        getRestrauntsFrmGoog.open("GET", URL, true);
-        getRestrauntsFrmGoog.send();
+        getRestaurantsFrmGoog.open("GET", URL, true);
+        getRestaurantsFrmGoog.send();
     });
 }
 
-function getRestrauntFromGoogle(restraunt) {
-    console.log("Enter Get Restraunt of Id:" + restraunt.sourceIdentifiers["GOOGLE"]);
+function getRestaurantFromGoogle(restaurant) {
+    console.log("Enter Get Restaurant of Id:" + restaurant.sourceIdentifiers["GOOGLE"]);
     return new Promise((resolve, reject) => {
-        const getRestrauntFrmGoog = new XMLHttpRequest();
-        getRestrauntFrmGoog.onload = event => {
-            if (getRestrauntFrmGoog.status !== 200) {
-                reject(getRestrauntFrmGoog.status);
+        const getRestaurantFrmGoog = new XMLHttpRequest();
+        getRestaurantFrmGoog.onload = event => {
+            if (getRestaurantFrmGoog.status !== 200) {
+                reject(getRestaurantFrmGoog.status);
             }
-            const response = JSON.parse(getRestrauntFrmGoog.responseText);
+            const response = JSON.parse(getRestaurantFrmGoog.responseText);
             var commentsList = [];
             var reviews = response.json.result.reviews;
             for(var i = 0; i< reviews.length; i++ ){
                 commentsList.push(reviews[i].text);
             }
-            restraunt.comments = commentsList;
+            restaurant.comments = commentsList;
             //console.log(response.json.result.reviews);
-            console.log(restraunt)
+            console.log(restaurant)
             resolve(response);
         }
-        var URL = "/place?" + "placeid=" + restraunt.sourceIdentifiers["GOOGLE"] + "&field=review";
-        getRestrauntFrmGoog.open("GET", URL, true);
-        getRestrauntFrmGoog.send();
+        var URL = "/place?" + "placeid=" + restaurant.sourceIdentifiers["GOOGLE"] + "&field=review";
+        getRestaurantFrmGoog.open("GET", URL, true);
+        getRestaurantFrmGoog.send();
     });
-    console.log("Exit Get Restraunt of Id:" + place);
+    console.log("Exit Get Restaurant of Id:" + place);
 }
 
 // window.getLatLng = getLatLng
-// window.getRestrauntFromGoogle = getRestrauntFromGoogle
-// window.getRestrauntsFromGoogle = getRestrauntsFromGoogle
+// window.getRestaurantFromGoogle = getRestaurantFromGoogle
+// window.getRestaurantsFromGoogle = getRestaurantsFromGoogle
 export {
     getLatLng,
-    getRestrauntsFromGoogle
+    getRestaurantsFromGoogle
 }
-export { restrauntsList }
+export { restaurantsList }
