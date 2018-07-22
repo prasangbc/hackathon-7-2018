@@ -74,11 +74,11 @@ function getRestrauntFromGoogle(restraunt) {
     console.log("Exit Get Restraunt of Id:" + place);
 }
 
-window.getLatLng = getLatLng
-window.getRestrauntFromGoogle = getRestrauntFromGoogle
-window.getRestrauntsFromGoogle = getRestrauntsFromGoogle
+// window.getLatLng = getLatLng
+// window.getRestrauntFromGoogle = getRestrauntFromGoogle
+// window.getRestrauntsFromGoogle = getRestrauntsFromGoogle
 export {
     getLatLng,
-    getRestrauntFromGoogle,
     getRestrauntsFromGoogle
 }
+export { restaurantsList }

@@ -18,7 +18,7 @@
     }
     today = yyyy + mm + dd;
 
-    function getRestaurantsFromLatLong(latitude = '39.09973', longitude = '-94.57857', radius = 25000) {
+    function getFourSquareReviews(latitude = '39.09973', longitude = '-94.57857', radius = 25000) {
         console.log("Retrieving Restaurants Details from FourSquare");
 
         var comma = ','
@@ -99,5 +99,5 @@
         });
     }
 
-    export default getRestaurantsFromLatLong
+    export default getFourSquareReviews
     export { restaurantsList }
