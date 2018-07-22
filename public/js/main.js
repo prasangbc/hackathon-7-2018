@@ -12,7 +12,7 @@ import {
 } from './lib/loadingIndicator.js';
 
 const zipCode = 66210;
-const dish = 'biriyani';
+const dish = 'biryani';
 const radius = 25000;
 
 $(document).ready(() => {
@@ -20,21 +20,15 @@ $(document).ready(() => {
 
     var latitude, longitude;
     getLatLng(zipCode)
+        .then(response => response.json())
         .then((response) => {
             latitude = response.json.results[0].geometry.location.lat;
             longitude = response.json.results[0].geometry.location.lng;
             return response.json.results[0].geometry.location;
         })
-        .then((latlng) => {
-            getFourSquareReviews(latitude, longitude, radius);
-            getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode)
-        })
-        .then((response) => {
-            var rest = [];
-            rest = retrieveMentionedComments(fourSquareRestaurantList, dish);
-            rest = retrieveMentionedComments(googleRestaurantsList, dish);
-            console.log(rest);
-            console.log("Retrieved Restaurants Details from FourSquare");
+        .then(() => {
+            getFourSquareReviews(latitude, longitude, radius).then(()=>{retrieveMentionedComments(fourSquareRestaurantList,dish)});
+            getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode).then(()=>{retrieveMentionedComments(googleRestaurantsList,dish)});
         }).catch((error) => {
             console.error(error);
         });

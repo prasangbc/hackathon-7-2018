@@ -8,7 +8,7 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
 
     //restaurantsList.forEach(oneRestaurant => {
     for (var k = 0; k < restaurantsList.length; k++) {
-        var refinedComments = refineComments(restaurantsList[k].comments);
+        var refinedComments = refineComments(restaurantsList[k].comments ||[]);
         var commentsSize = refinedComments.length;
         var commentsToAdd = [];
         //console.log(restaurantsList);
@@ -61,13 +61,16 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
                 });
 
             }
-        }
-        //adding to merge result
-        retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
 
-        return retrieveMentionedComments.mergeResults.sort(sortBasedOnSecretSauce);
-        //console.log(retrieveMentionedComments.mergeResults);
+            //adding to merge result
+            retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
+
+        }
       }
+    if(typeof retrieveMentionedComments.mergeResults == 'undefined')
+     return [];
+    return Object.values(retrieveMentionedComments.mergeResults).sort(sortBasedOnSecretSauce);
+        //console.log(retrieveMentionedComments.mergeResults);
     }
 
 function searchString(rawString) {
@@ -82,7 +85,7 @@ function searchString(rawString) {
     return refinedSingleWordStrings;
 }
 
-  function refineComments(rawComments) {
+  function refineComments(rawComments = []) {
     var newComments = [];
     rawComments.forEach(element => {
         newComments.push(element.replace(/[^a-zA-Z ]/g, " ").toLowerCase());
@@ -118,7 +121,7 @@ function searchString(rawString) {
 
   //var testObj = [{"menuItemComments":[], "likes":1, "visitsCount":4}
   //              ,{ "menuItemComments": ["w"], "likes": 1, "visitsCount": 2 }
-  //              ,{ "menuItemComments": [], "likes": 1, "visitsCount": 3 }] 
+  //              ,{ "menuItemComments": [], "likes": 1, "visitsCount": 3 }]
 
   //console.log("this is shit")
   //console.log(testObj.sort(sortBasedOnSecretSauce));
