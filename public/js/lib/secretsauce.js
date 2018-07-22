@@ -69,7 +69,7 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
       }
     if(typeof retrieveMentionedComments.mergeResults == 'undefined')
      return [];
-    return retrieveMentionedComments.mergeResults.sort(sortBasedOnSecretSauce);
+    return Object.values(retrieveMentionedComments.mergeResults).sort(sortBasedOnSecretSauce);
         //console.log(retrieveMentionedComments.mergeResults);
     }
 
@@ -121,7 +121,7 @@ function searchString(rawString) {
 
   //var testObj = [{"menuItemComments":[], "likes":1, "visitsCount":4}
   //              ,{ "menuItemComments": ["w"], "likes": 1, "visitsCount": 2 }
-  //              ,{ "menuItemComments": [], "likes": 1, "visitsCount": 3 }] 
+  //              ,{ "menuItemComments": [], "likes": 1, "visitsCount": 3 }]
 
   //console.log("this is shit")
   //console.log(testObj.sort(sortBasedOnSecretSauce));
