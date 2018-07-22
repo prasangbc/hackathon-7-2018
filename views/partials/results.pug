@@ -2,9 +2,21 @@
     unless !restaurants || restaurants.length == 0
         .row
             .col-md-12
-                h4 Results
+                h4.bold Results
                 each restaurant in restaurants
                     li.card
-                    .card-body
-                        h5.card-title= restaurant.name
+                        .card-title.row
+                            .col-md-6.h5= restaurant.name
+                            .col-md-2
+                                .col-md-10
+                                    button.btn.btn-primary(type='button' disabled)= 'Comments  '
+                                        span.badge.badge-light.text-right= restaurant.menuItemComments.length
+                            .col-md-2
+                                .col-md-10
+                                    button.btn.btn-secondary(type='button' disabled)= 'Likes   '
+                                        span.badge.badge-light.text-right= restaurant.likes
+                            .col-md-2
+                                    button.btn.btn-success(type='button' disabled)= 'Visits    '
+                                        span.badge.badge-light.text-right= restaurant.visitsCount
                         p.card-text= restaurant.address
+                    br
