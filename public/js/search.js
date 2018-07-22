@@ -1,3 +1,4 @@
+
 $(document).ready(() => {
   function retrieveMentionedComments(restaurantsList, searchString) {
     document.write("test12"); //need to commit
@@ -24,8 +25,14 @@ $(document).ready(() => {
             break;
         }
 
-        if (found == true && j == searchWordSize)
-          document.write("I need to add it to the results")
+        if (found == true && j == searchWordSize){
+          //Here we need the logic to merge the results.
+          if( typeof retrieveMentionedComments.mergeResults == 'undefined') {
+            //var mergeOneResult 
+          }
+          
+
+        }
       }
     }
       
