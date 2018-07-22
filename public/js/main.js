@@ -1,4 +1,4 @@
-import getFourSquareReviews from './lib/foursquare_api.js';
+import getFourSquareReviews, { getFourSquareReviewsByQuery } from './lib/foursquare_api.js';
 import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_api.js'
 import retrieveMentionedComments from './lib/secretSauce.js';
 import {
@@ -31,12 +31,17 @@ const fetchResults = () => {
         .then(({ latitude, longitude }) => {
             getFourSquareReviews(latitude, longitude, radius)
                 .then(() => {
-                    retrieveMentionedComments(fourSquareRestaurantList,dish)
+                    retrieveMentionedComments(fourSquareRestaurantList, dish)
+                    updateResults()
+                });
+            getFourSquareReviewsByQuery(latitude, longitude, radius, dish)
+                .then(() => {
+                    retrieveMentionedComments(fourSquareRestaurantList, dish)
                     updateResults()
                 });
             getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode)
                 .then(() => {
-                    retrieveMentionedComments(googleRestaurantsList,dish)
+                    retrieveMentionedComments(googleRestaurantsList, dish)
                     updateResults()
                 });
         }).catch((error) => {
