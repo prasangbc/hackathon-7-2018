@@ -23,7 +23,7 @@
 
         var comma = ','
         var ll = latitude + comma + longitude;
-        var URL = "https://api.foursquare.com/v2/venues/search?" + "ll=" + ll +
+        var URL = "https://api.foursquare.com/v2/venues/search?" + "ll=" + ll + "&limit=" + "50" +
             "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret +
             "&categoryId=" + category_id +
             "&radius" + radius + "&v=" + today;
