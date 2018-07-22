@@ -12,7 +12,7 @@ import {
 } from './lib/loadingIndicator.js';
 
 const zipCode = 66210;
-const dish = 'biriyani';
+const dish = 'biryani';
 const radius = 25000;
 
 $(document).ready(() => {
