@@ -21,9 +21,10 @@ import {
 const radius = 250000;
 
 const fetchResults = () => {
-    $('#results').empty();
-    const dish = getKeywords()
-    const zipCode = getZipCode()
+     $('#results').empty();
+    
+    const dish = getKeywords();
+    const zipCode = getZipCode();
     return getLatLng(zipCode)
         .then(response => response.json())
         .then((response) => response.json.results[0].geometry.location)

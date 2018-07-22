@@ -26,9 +26,17 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
             }
         }
 
+        if(retrieveMentionedComments.previousSearchString == 'undefined' || retrieveMentionedComments.previousSearchString == null) {
+            retrieveMentionedComments.previousSearchString = rawInputSearchString;
+        }
+
+
         //Restaurant to add
-        if (typeof retrieveMentionedComments.mergeResults == 'undefined' && commentsToAdd.length > 0) {
+        if ((typeof retrieveMentionedComments.mergeResults == 'undefined' && commentsToAdd.length > 0) ||
+            (retrieveMentionedComments.previousSearchString != rawInputSearchString)) {
             retrieveMentionedComments.mergeResults = {};
+            retrieveMentionedComments.previousSearchString = null;
+
         }
 
         if (commentsToAdd.length > 0) {
