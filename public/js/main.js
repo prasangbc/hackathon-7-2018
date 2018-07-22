@@ -20,12 +20,13 @@ $(document).ready(() => {
 
     var latitude, longitude;
     getLatLng(zipCode)
+        .then(response => response.json())
         .then((response) => {
             latitude = response.json.results[0].geometry.location.lat;
             longitude = response.json.results[0].geometry.location.lng;
             return response.json.results[0].geometry.location;
         })
-        .then((latlng) => {
+        .then(() => {
             getFourSquareReviews(latitude, longitude, radius).then(()=>{retrieveMentionedComments(fourSquareRestaurantList,dish)});
             getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode).then(()=>{retrieveMentionedComments(googleRestaurantsList,dish)});
         }).catch((error) => {
