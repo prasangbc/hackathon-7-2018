@@ -19,6 +19,8 @@ function getRestaurantsFromGoogle(query = 'biriyani', lat = '39.09973', lng = '-
             var restrantWTFId = restaurantKey(restaurants[i].name, zipCode);
             var restaurant = new Restaurant(restrantWTFId, "GOOGLE", restaurants[i].place_id, restaurants[i].name, restaurants[i].formatted_address);
             restaurant.rating = restaurants[i].rating;
+            restaurant.lat = restaurants[i].geometry.location.lat;
+            restaurant.long = restaurants[i].geometry.location.lng;
             restaurantsList.push(restaurant);
             promises.push(getRestaurantFromGoogle(restaurant));
         }

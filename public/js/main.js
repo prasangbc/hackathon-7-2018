@@ -12,8 +12,8 @@ import {
 } from './lib/loadingIndicator.js';
 
 const zipCode = 66210;
-const dish = 'biryani';
-const radius = 25000;
+const dish = 'chocolate cake';
+const radius = 250000;
 
 $(document).ready(() => {
     $('button[type=submit]').click(() => setLoading(true));

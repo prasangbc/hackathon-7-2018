@@ -62,11 +62,18 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
 
             }
 
+            if (typeof restaurantsList[k].sourceIdentifiers.GOOGLE != 'undefined') {
+                obj.lat = restaurantsList[k].lat;
+                obj.long = restaurantsList[k].long;
+            }
+
             //adding to merge result
             retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
 
         }
       }
+      console.log("testVarun");
+      console.log(retrieveMentionedComments.mergeResults);
     if(typeof retrieveMentionedComments.mergeResults == 'undefined')
      return [];
     return Object.values(retrieveMentionedComments.mergeResults).sort(sortBasedOnSecretSauce);

@@ -61,6 +61,11 @@
             restaurant.visitsCount = response.response.venue.stats.visitsCount;
             //console.log("Restaurant Visits Count: " + restaurant.restaurantVisitsCount);
 
+            restaurant.lat = response.response.venue.location.lat;
+
+            restaurant.long = response.response.venue.location.lng;
+
+
             //console.log(response.response.venues);
             //console.log(response.response.venues.id);
             for (var j = 0; j < response.response.venue.tips.groups.length; j++) {

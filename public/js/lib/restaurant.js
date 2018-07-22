@@ -14,6 +14,8 @@ class Restaurant {
         this.likes = 0;
         this.visitsCount = 0;
         this.hasMenu = false;
+        this.lat = 0;
+        this.long = 0;
     }
 }
 
