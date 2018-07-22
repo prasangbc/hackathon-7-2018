@@ -44,6 +44,36 @@
         });
     }
 
+    function getFourSquareReviewsByQuery(latitude = '39.09973', longitude = '-94.57857', radius = 25000, query = 'burger') {
+        console.log("Retrieving Restaurants Details By Query from FourSquare");
+
+        var comma = ','
+        var ll = latitude + comma + longitude;
+        var URL = "https://api.foursquare.com/v2/venues/explore?" + "ll=" + ll + "&query=" + query + "&limit=" + "50" +
+            "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret +
+            "&radius" + radius + "&v=" + today;
+        console.log(URL);
+        return fetch(URL).then((response) => {
+            return response.json();
+        }).then((response) => {
+            var promises = [];
+            for (var i = 0; i < response.response.groups.length; i++) {
+                for (var j = 0; j < response.response.groups[i].items.length; j++) {
+                    var zipCode = response.response.groups[i].items[j].venue.location.postalCode;
+                    var restaurantWTFId = restaurantKey(response.response.groups[i].items[j].venue.name, zipCode);
+                    var restaurant = new Restaurant(restaurantWTFId, "FOURSQUARE", response.response.groups[i].items[j].venue.id, response.response.groups[i].items[j].venue.name, response.response.groups[i].items[j].venue.location.formattedAddress);
+                    restaurantsList.push(restaurant);
+                    promises.push(getRestaurantsDetails(restaurant));
+                    promises.push(getRestaurantMenu(restaurant));
+                }
+
+            }
+            //console.log(restaurantsList);
+            console.log("Retrieved Restaurants Details By Query from FourSquare");
+            return Promise.all(promises);
+        });
+    }
+
     function getRestaurantsDetails(restaurant) {
         var URL = "https://api.foursquare.com/v2/venues/" + restaurant.sourceIdentifiers["FOURSQUARE"] + "?" +
             "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret + "&v=" + today;
@@ -66,8 +96,6 @@
             restaurant.long = response.response.venue.location.lng;
 
 
-            //console.log(response.response.venues);
-            //console.log(response.response.venues.id);
             for (var j = 0; j < response.response.venue.tips.groups.length; j++) {
                 for (var k = 0; k < response.response.venue.tips.groups[j].items.length; k++) {
                     commentsList.push(response.response.venue.tips.groups[j].items[k].text);
@@ -105,4 +133,5 @@
     }
 
     export default getFourSquareReviews
+    export { getFourSquareReviewsByQuery }
     export { restaurantsList }
