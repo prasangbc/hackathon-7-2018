@@ -7,3 +7,12 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+
+exports.results = (request, response) => {
+    const {
+        restaurants
+    } = request.body;
+    response.render('results', {
+        restaurants
+    })
+}

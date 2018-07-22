@@ -1,23 +1,21 @@
 import getFourSquareReviews from './lib/foursquare_api.js';
 import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_api.js'
 import retrieveMentionedComments from './lib/secretSauce.js';
-
+import {
+    registerSubmitHandler
+ } from './lib/eventHandlers.js'
 import {
     getLatLng,
     getRestaurantsFromGoogle
 } from './lib/google.js';
 import { restaurantsList as googleRestaurantsList } from './lib/google.js';
-import {
-    setLoading
-} from './lib/loadingIndicator.js';
 
 const zipCode = 66210;
 const dish = 'chocolate cake';
 const radius = 250000;
 
 $(document).ready(() => {
-    $('button[type=submit]').click(() => setLoading(true));
-
+    registerSubmitHandler();
     var latitude, longitude;
     getLatLng(zipCode)
         .then(response => response.json())
