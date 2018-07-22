@@ -12,7 +12,7 @@ import {
 } from './lib/loadingIndicator.js';
 
 const zipCode = 66210;
-const dish = 'biriyani';
+const dish = 'biryani';
 const radius = 25000;
 
 $(document).ready(() => {
@@ -31,8 +31,9 @@ $(document).ready(() => {
         })
         .then((response) => {
             var rest = [];
-            rest = retrieveMentionedComments(fourSquareRestaurantList, dish);
+            retrieveMentionedComments(fourSquareRestaurantList, dish);
             rest = retrieveMentionedComments(googleRestaurantsList, dish);
+            console.log("see below")
             console.log(rest);
             console.log("Retrieved Restaurants Details from FourSquare");
         }).catch((error) => {

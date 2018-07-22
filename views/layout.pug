@@ -9,6 +9,8 @@ html
     title #{title} - Hackathon Starter
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
+    script(type='module' src='/js/lib/map.js')
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=1FUFIB113VVEDYVTZENGIA3I0ON2ZIRR2QEQ3V1IL5PAFH4F&callback=initMap")
 
   body
     include partials/header

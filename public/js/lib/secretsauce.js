@@ -61,13 +61,14 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
                 });
 
             }
-        }
-        //adding to merge result
-        retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
 
-        return retrieveMentionedComments.mergeResults.sort(sortBasedOnSecretSauce);
-        //console.log(retrieveMentionedComments.mergeResults);
+          //adding to merge result
+          retrieveMentionedComments.mergeResults[restaurantsList[k].wtfId] = obj;
+        }
       }
+
+      return retrieveMentionedComments.mergeResults.sort(sortBasedOnSecretSauce);
+        //console.log(retrieveMentionedComments.mergeResults);
     }
 
 function searchString(rawString) {
