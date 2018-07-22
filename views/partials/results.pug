@@ -2,9 +2,13 @@
     unless !restaurants || restaurants.length == 0
         .row
             .col-md-12
-                h4 Results
+                h4.bold Results
                 each restaurant in restaurants
                     li.card
-                    .card-body
-                        h5.card-title= restaurant.name
+                        .card-title.row
+                            .col-md-9.h5= restaurant.name
+                            .col-md-1= restaurant.menuItemComments.length
+                            .col-md-1= restaurant.likes
+                            .col-md-1= restaurant.visitsCount
                         p.card-text= restaurant.address
+                    br
