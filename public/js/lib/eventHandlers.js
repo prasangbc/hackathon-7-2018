@@ -3,21 +3,19 @@ import {
 } from './loadingIndicator.js';
 import retrieveMentionedComments from './secretSauce.js';
 
-const registerSubmitHandler = () => $('button[type=submit]').click(() => {
+const registerSubmitHandler = (onclick) => $('button[type=submit]').click(() => {
     setLoading(true);
-    fetch('/results', {
+    return onclick();
+});
+
+const updateResults = () => {
+    return fetch('/results', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            restaurants: retrieveMentionedComments.mergeResults || [{
-                name: "Prasang's restaurant",
-                address: '420 High street, Nirvana, USA'
-            }, {
-                name: "Varun's restaurant",
-                address: '420 High street, Nirvana, USA'
-            }]
+            restaurants: retrieveMentionedComments.mergeResults
         })
     })
     .then(response => response.text())
@@ -29,8 +27,9 @@ const registerSubmitHandler = () => $('button[type=submit]').click(() => {
     .finally(() => {
         setLoading(false)
     });
-});
+}
 
 export {
-    registerSubmitHandler
+    registerSubmitHandler,
+    updateResults
 };

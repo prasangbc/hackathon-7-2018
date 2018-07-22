@@ -34,7 +34,7 @@ function getRestaurantFromGoogle(restaurant) {
         .then(response => response.json())
         .then(response => {
             var commentsList = [];
-            var reviews = response.json.result.reviews;
+            var reviews = response.json.result.reviews || [];
             for (var i = 0; i < reviews.length; i++) {
                 commentsList.push(reviews[i].text);
             }
