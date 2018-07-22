@@ -4,7 +4,7 @@
     var foursquare_client_id = 'SRORFR3CHMAKXPPCIF5XD2KEZJXAPYCS4D0CH3TZ4WFQ50N2';
     var foursquare_client_secret = '1FUFIB113VVEDYVTZENGIA3I0ON2ZIRR2QEQ3V1IL5PAFH4F';
     var category_id = '4d4b7105d754a06374d81259';
-    var restaurantsList = [];
+    var restrauntsList = [];
 
     var today = new Date();
     var dd = today.getDate();
@@ -35,7 +35,7 @@
                 var zipCode = response.response.venues[i].location.postalCode;
                 var restaurantWTFId = restaurantKey(response.response.venues[i].name, zipCode);
                 var restaurant = new Restaurant(restaurantWTFId, "FOURSQUARE", response.response.venues[i].id, response.response.venues[i].name, response.response.venues[i].location.formattedAddress);
-                restaurantsList.push(restaurant);
+                restrauntsList.push(restaurant);
                 promises.push(getRestaurantsDetails(restaurant));
                 promises.push(getRestaurantMenu(restaurant));
             }
@@ -100,4 +100,4 @@
     }
 
     export default getFourSquareReviews
-    export { restaurantsList }
+    export { restrauntsList }

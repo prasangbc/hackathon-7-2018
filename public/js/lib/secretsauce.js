@@ -69,7 +69,6 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
         //console.log(retrieveMentionedComments.mergeResults);
       }
     }
-}
 
 function searchString(rawString) {
     //rawString = "basdlkf ja232r423!01234889&9"; //need to commit

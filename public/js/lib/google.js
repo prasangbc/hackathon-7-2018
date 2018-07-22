@@ -81,4 +81,4 @@ export {
     getLatLng,
     getRestrauntsFromGoogle
 }
-export { restaurantsList }
+export { restrauntsList }

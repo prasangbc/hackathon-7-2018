@@ -1,11 +1,12 @@
 import getFourSquareReviews from './lib/foursquare_api.js';
-import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_api.js'
+import { restrauntsList as fourSquareRestaurantList } from './lib/foursquare_api.js'
 import retrieveMentionedComments from './lib/secretSauce.js';
 
 import {
     getLatLng,
     getRestrauntsFromGoogle
 } from './lib/google.js';
+import { restrauntsList as googleRestrauntsList } from './lib/google.js';
 import {
     setLoading
 } from './lib/loadingIndicator.js';
@@ -31,6 +32,7 @@ $(document).ready(() => {
         .then((response) => {
             var rest = [];
             rest = retrieveMentionedComments(fourSquareRestaurantList, dish);
+            rest = retrieveMentionedComments(googleRestrauntsList, dish);
             console.log(rest);
             console.log("Retrieved Restaurants Details from FourSquare");
         }).catch((error) => {
