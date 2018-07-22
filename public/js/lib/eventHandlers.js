@@ -2,6 +2,19 @@ import {
     setLoading
 } from './loadingIndicator.js';
 import retrieveMentionedComments from './secretSauce.js';
+import {
+    updateKeywords,
+    updateZipCode
+} from './input.js'
+
+const registerInputChangeHandlers = () => {
+    $('input[name=search]').keyup(() => {
+        updateKeywords($('input[name=search]').val())
+        console.log(`update with ${$('input[name=search]').val()}`)
+    })
+    $('input[name=zip]').keyup(() =>
+      updateZipCode($('input[name=zip]').val()))
+}
 
 const registerSubmitHandler = (onclick) => $('button[type=submit]').click(() => {
     setLoading(true);
@@ -30,6 +43,7 @@ const updateResults = () => {
 }
 
 export {
+    registerInputChangeHandlers,
     registerSubmitHandler,
     updateResults
 };

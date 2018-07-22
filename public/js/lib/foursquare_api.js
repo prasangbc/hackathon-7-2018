@@ -55,7 +55,7 @@
             restaurant.rating = response.response.venue.rating;
             //console.log("Restaurant Rating: " + restaurant.rating);
 
-            restaurant.likes = response.response.venue.likes.count;
+            restaurant.likes = (response.response.venue.likes || []).count;
             //console.log("Restaurant Likes: " + restaurant.restaurantLikes);
 
             restaurant.visitsCount = response.response.venue.stats.visitsCount;

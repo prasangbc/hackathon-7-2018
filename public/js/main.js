@@ -3,19 +3,27 @@ import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_ap
 import retrieveMentionedComments from './lib/secretSauce.js';
 import {
     registerSubmitHandler,
-    updateResults
+    updateResults,
+    registerInputChangeHandlers
  } from './lib/eventHandlers.js'
 import {
     getLatLng,
     getRestaurantsFromGoogle
 } from './lib/google.js';
 import { restaurantsList as googleRestaurantsList } from './lib/google.js';
+import {
+    getKeywords,
+    getZipCode
+} from './lib/input.js'
 
-const zipCode = 66210;
-const dish = 'chocolate cake';
+// const zipCode = 66210;
+// const dish = 'haleem';
 const radius = 250000;
 
-const fetchResults = (dish, zipCode) => {
+const fetchResults = () => {
+    $('#results').empty();
+    const dish = getKeywords()
+    const zipCode = getZipCode()
     return getLatLng(zipCode)
         .then(response => response.json())
         .then((response) => response.json.results[0].geometry.location)
@@ -36,5 +44,6 @@ const fetchResults = (dish, zipCode) => {
 };
 
 $(document).ready(() => {
-    registerSubmitHandler(() => fetchResults(dish, zipCode));
+    registerInputChangeHandlers();
+    registerSubmitHandler(fetchResults);
 });
