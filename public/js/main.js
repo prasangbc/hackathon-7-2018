@@ -1,4 +1,6 @@
-import getRestaurantsFromLatLong from './lib/foursquare_api.js';
+import getFourSquareReviews from './lib/foursquare_api.js';
+import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_api.js'
+import retrieveMentionedComments from './lib/secretSauce.js';
 
 import {
     setLoading
@@ -8,5 +10,12 @@ $(document).ready(() => {
     $('button[type=submit]').click(() => setLoading(true));
 
     // Place JavaScript code here...
-    getRestaurantsFromLatLong();
+    getFourSquareReviews().then(() => {
+        var rest = [];
+        rest = retrieveMentionedComments(fourSquareRestaurantList, "pasta");
+        console.log(rest);
+        console.log("Retrieved Restaurants Details from FourSquare");
+    }).catch((error) => {
+        console.error(error);
+    });
 });
