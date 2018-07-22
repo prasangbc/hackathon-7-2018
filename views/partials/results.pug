@@ -19,4 +19,18 @@
                                     button.btn.btn-success(type='button' disabled)= 'Visits    '
                                         span.badge.badge-light.text-right= restaurant.visitsCount
                         p.card-text= restaurant.address
-                    br
+                        a.col-md-2.btn.btn-primary(href="#", data-toggle="modal", data-target="#phone-modal", data-lat=restaurant.lat, data-long=restaurant.long, data-address=restaurant.address) Send to Phone
+        .modal.fade#phone-modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+            .modal-dialog(role="document")
+                .modal-content
+                    .modal-header
+                        h5.modal-title#exampleModalLabel Send directions to phone
+                        button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    .modal-body
+                        form(action="#")
+                            .form-group
+                                input.form-control#recipient
+                    .modal-footer
+                        button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+                        button.btn.btn-primary#send-map(type="button") Send
