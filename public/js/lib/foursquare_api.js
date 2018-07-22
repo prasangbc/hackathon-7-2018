@@ -22,7 +22,7 @@
         console.log("Retrieving Restaurants Details from FourSquare");
 
         var comma = ','
-        var ll = latitude.concat(comma, longitude);
+        var ll = latitude + comma + longitude;
         var URL = "https://api.foursquare.com/v2/venues/search?" + "ll=" + ll +
             "&client_id=" + foursquare_client_id + "&client_secret=" + foursquare_client_secret +
             "&categoryId=" + category_id +
