@@ -17,19 +17,18 @@ exports.geocode = (req, res) => {
     const { params: zipCode = zipcode } = req;
     res.setHeader('Content-Type', 'application/json');
     populateResponseFromPromise(
-        promisify(googleMapsClient.geocode)({ address: zipCode.toString() }),
-        res)
+        promisify(googleMapsClient.geocode)({ address: zipCode.toString() }), res)
 }
 
 exports.places = (req, res) => {
     const { query: queryParams } = req;
     const {
         query:
-            query,
-            type,
-            radius,
-            lat,
-            lng
+        query,
+        type,
+        radius,
+        lat,
+        lng
     } = queryParams;
     res.setHeader('Content-Type', 'application/json');
     populateResponseFromPromise(
@@ -41,6 +40,22 @@ exports.places = (req, res) => {
                 lat: parseFloat(lat),
                 lng: parseFloat(lng)
             }
-        }),
-        res)
+        }), res)
+}
+
+exports.place = (req, res) => {
+    const { query: queryParams } = req;
+    const {
+        placeid,
+        field
+    } = queryParams;
+    res.setHeader('Content-Type', 'application/json');
+    //console.log(req);
+    console.log(queryParams);
+    console.log({ placeid, fields: [field] });
+    populateResponseFromPromise(
+        promisify(googleMapsClient.place)({
+            placeid,
+            fields: [field]
+        }), res)
 }

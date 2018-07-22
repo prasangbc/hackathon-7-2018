@@ -130,6 +130,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 app.get('/', homeController.index);
 app.get('/geocode', mapController.geocode);
 app.get('/places', mapController.places);
+app.get('/place', mapController.place);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
