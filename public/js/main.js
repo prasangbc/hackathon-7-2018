@@ -26,15 +26,8 @@ $(document).ready(() => {
             return response.json.results[0].geometry.location;
         })
         .then((latlng) => {
-            getFourSquareReviews(latitude, longitude, radius);
-            getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode)
-        })
-        .then((response) => {
-            var rest = [];
-            rest = retrieveMentionedComments(fourSquareRestaurantList, dish);
-            rest = retrieveMentionedComments(googleRestaurantsList, dish);
-            console.log(rest);
-            console.log("Retrieved Restaurants Details from FourSquare");
+            getFourSquareReviews(latitude, longitude, radius).then(()=>{retrieveMentionedComments(fourSquareRestaurantList,dish)});
+            getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode).then(()=>{retrieveMentionedComments(googleRestaurantsList,dish)});
         }).catch((error) => {
             console.error(error);
         });

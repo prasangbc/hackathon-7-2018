@@ -8,7 +8,7 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
 
     //restaurantsList.forEach(oneRestaurant => {
     for (var k = 0; k < restaurantsList.length; k++) {
-        var refinedComments = refineComments(restaurantsList[k].comments);
+        var refinedComments = refineComments(restaurantsList[k].comments ||[]);
         var commentsSize = refinedComments.length;
         var commentsToAdd = [];
         //console.log(restaurantsList);
@@ -82,7 +82,7 @@ function searchString(rawString) {
     return refinedSingleWordStrings;
 }
 
-  function refineComments(rawComments) {
+  function refineComments(rawComments = []) {
     var newComments = [];
     rawComments.forEach(element => {
         newComments.push(element.replace(/[^a-zA-Z ]/g, " ").toLowerCase());
