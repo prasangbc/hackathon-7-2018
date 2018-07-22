@@ -9,23 +9,45 @@ function getLatLng(zipcode = 66210) {
 
 function getRestaurantsFromGoogle(query = 'biriyani', lat = '39.09973', lng = '-94.57857', radius = 25000, zipCode = 66210) {
     var URL = "/places?" + "query=" + query +
-            "&type=restaurant" + "&radius=" + radius + "&lat=" + lat + "&lng=" + lng;
+        "&type=restaurant" + "&radius=" + radius + "&lat=" + lat + "&lng=" + lng;
     return fetch(URL)
-      .then((response) => response.json())
-      .then(response => {
-        var restaurants = response.json.results;
-        var promises = [];
-        for (var i = 0; i < restaurants.length; i++) {
-            var restrantWTFId = restaurantKey(restaurants[i].name, zipCode);
-            var restaurant = new Restaurant(restrantWTFId, "GOOGLE", restaurants[i].place_id, restaurants[i].name, restaurants[i].formatted_address);
-            restaurant.rating = restaurants[i].rating;
-            restaurant.lat = restaurants[i].geometry.location.lat;
-            restaurant.long = restaurants[i].geometry.location.lng;
-            restaurantsList.push(restaurant);
-            promises.push(getRestaurantFromGoogle(restaurant));
-        }
-        return Promise.all(promises);
-      });
+        .then((response) => response.json())
+        .then(response => {
+            var restaurants = response.json.results;
+            var promises = [];
+            for (var i = 0; i < restaurants.length; i++) {
+                var restrantWTFId = restaurantKey(restaurants[i].name, zipCode);
+                var restaurant = new Restaurant(restrantWTFId, "GOOGLE", restaurants[i].place_id, restaurants[i].name, restaurants[i].formatted_address);
+                restaurant.rating = restaurants[i].rating;
+                restaurant.lat = restaurants[i].geometry.location.lat;
+                restaurant.long = restaurants[i].geometry.location.lng;
+                restaurantsList.push(restaurant);
+                promises.push(getRestaurantFromGoogle(restaurant));
+            }
+            return Promise.all(promises);
+        });
+}
+
+function getRestaurantsFromGoogleWithoutQuery(lat = '39.09973', lng = '-94.57857', radius = 25000, zipCode = 66210) {
+    var URL = "/places?" +
+        "&type=restaurant" + "&radius=" + radius + "&lat=" + lat + "&lng=" + lng;
+    return fetch(URL)
+        .then((response) => response.json())
+        .then(response => {
+            var restaurants = response.json.results;
+            var promises = [];
+            for (var i = 0; i < restaurants.length; i++) {
+                var restrantWTFId = restaurantKey(restaurants[i].name, zipCode);
+                var restaurant = new Restaurant(restrantWTFId, "GOOGLE", restaurants[i].place_id, restaurants[i].name, restaurants[i].formatted_address);
+                restaurant.rating = restaurants[i].rating;
+                restaurant.lat = restaurants[i].geometry.location.lat;
+                restaurant.long = restaurants[i].geometry.location.lng;
+                restaurantsList.push(restaurant);
+                promises.push(getRestaurantFromGoogle(restaurant));
+            }
+            //console.log(restaurantsList);
+            return Promise.all(promises);
+        });
 }
 
 function getRestaurantFromGoogle(restaurant) {
@@ -45,6 +67,7 @@ function getRestaurantFromGoogle(restaurant) {
 
 export {
     getLatLng,
-    getRestaurantsFromGoogle
+    getRestaurantsFromGoogle,
+    getRestaurantsFromGoogleWithoutQuery
 }
 export { restaurantsList }

@@ -3,17 +3,13 @@ import { restaurantsList as fourSquareRestaurantList } from './lib/foursquare_ap
 import retrieveMentionedComments from './lib/secretSauce.js';
 import {
     registerSubmitHandler,
-<<<<<<< HEAD
     updateResults,
     registerInputChangeHandlers
- } from './lib/eventHandlers.js'
-=======
-    updateResults
 } from './lib/eventHandlers.js'
->>>>>>> 2a3fb65a4637cf546f4c771a41188dd32c8d64da
 import {
     getLatLng,
-    getRestaurantsFromGoogle
+    getRestaurantsFromGoogle,
+    getRestaurantsFromGoogleWithoutQuery
 } from './lib/google.js';
 import { restaurantsList as googleRestaurantsList } from './lib/google.js';
 import {
@@ -26,8 +22,8 @@ import {
 const radius = 250000;
 
 const fetchResults = () => {
-     $('#results').empty();
-    
+    $('#results').empty();
+
     const dish = getKeywords();
     const zipCode = getZipCode();
     return getLatLng(zipCode)
@@ -45,6 +41,11 @@ const fetchResults = () => {
                     updateResults()
                 });
             getRestaurantsFromGoogle(dish, latitude, longitude, radius, zipCode)
+                .then(() => {
+                    retrieveMentionedComments(googleRestaurantsList, dish)
+                    updateResults()
+                });
+            getRestaurantsFromGoogleWithoutQuery(latitude, longitude, radius, zipCode)
                 .then(() => {
                     retrieveMentionedComments(googleRestaurantsList, dish)
                     updateResults()
