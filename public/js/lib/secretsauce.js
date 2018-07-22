@@ -72,8 +72,8 @@ function retrieveMentionedComments(restaurantsList, rawInputSearchString) {
 
         }
       }
-      console.log("testVarun");
-      console.log(retrieveMentionedComments.mergeResults);
+      //console.log("testVarun");
+      //console.log(retrieveMentionedComments.mergeResults);
     if(typeof retrieveMentionedComments.mergeResults == 'undefined')
      return [];
     return Object.values(retrieveMentionedComments.mergeResults).sort(sortBasedOnSecretSauce);
@@ -110,12 +110,12 @@ function searchString(rawString) {
   function sortBasedOnSecretSauce(aRestaurant, bRestaurant) {
     if (aRestaurant.menuItemComments.length < bRestaurant.menuItemComments.length)
       return 1;
-    else if (bRestaurant.menuItemComments.length > bRestaurant.menuItemComments.length)
+    else if (aRestaurant.menuItemComments.length > bRestaurant.menuItemComments.length)
       return -1;
     else {
       if (aRestaurant.likes < bRestaurant.likes)
         return 1;
-      else if (bRestaurant.likes > bRestaurant.likes)
+      else if (aRestaurant.likes > bRestaurant.likes)
         return -1;
       else {
         if (aRestaurant.visitsCount < bRestaurant.visitsCount)
